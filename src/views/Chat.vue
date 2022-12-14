@@ -82,7 +82,7 @@ export default {
     },
     mounted() {
         document.getElementById("cover-spin").style.display = "block";
-        this.axios.get('message/chat').then((response) => {
+        this.axios.get('message/chat?clientId=' + window.localStorage.getItem('clientId')).then((response) => {
             document.getElementById("cover-spin").style.display = "none";
             response.data.data.forEach(element => {
                 this.chats.push(element);
