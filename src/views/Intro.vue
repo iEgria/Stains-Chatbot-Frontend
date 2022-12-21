@@ -49,14 +49,9 @@ export default {
     methods: {
         intro() {
             document.getElementById("cover-spin").style.display = "block";
-            if (this.clientName == '') {
-                window.localStorage.setItem('clientName', 'Anonim');
-                window.localStorage.setItem('clientId', Math.random().toString(36).slice(2) + 'Anonim' + Math.random().toString(36).slice(2));
-            } else {
-                window.localStorage.setItem('clientName', this.clientName);
-                window.localStorage.setItem('clientId', Math.random().toString(36).slice(2) + this.clientName + Math.random().toString(36).slice(2));
-            }
-            this.axios.post('intro', { 'clientId': window.localStorage.getItem('clientId'), 'clientName': window.localStorage.getItem('clientName') }).then(() => {
+            window.localStorage.setItem('clientName', (this.clientName == '' ? 'Anonim' : this.clientName));
+            this.axios.post('intro', { 'clientName': window.localStorage.getItem('clientName') }).then((response) => {
+                window.localStorage.setItem('clientId', response.data.id);
                 document.getElementById("cover-spin").style.display = "none";
                 this.$router.push({ name: 'chat' });
             });

@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faPaperPlane);
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.headers.common = { 'Authorization': `Bearer ${localStorage.getItem('bearerToken')}`};
+axios.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem('bearerToken')}`, Accept : 'application/json'};
 
 const appInstance = createApp(App);
 appInstance.use(store);

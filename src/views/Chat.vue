@@ -1,6 +1,6 @@
 <template>
     <div class="bg-gradient-info p-3" style="height: 100vh;">
-        <div class="card card-body blur mb-3 p-0" style="height: 85vh">
+        <div class="card card-body blur mb-3 p-0" style="height: 80vh">
             <!-- tombol untuk keluar ntr disini -->
             <div style="overflow-y: auto; overflow-x: hidden;" id="chatbox">
                 <div class="row mx-1 my-3" v-for="chat in chats" :key="chat.id">
@@ -18,7 +18,7 @@
                     <div class="col-10 offset-2">
                         <div class="card card-body p-3 bg-secondary text-white">
                             <div class="d-flex justify-content-between">
-                                <div> {{ name }}</div>
+                                <div> {{ name }} </div>
                                 <div>Harap Tunggu</div>
                             </div>
                             {{ temporaryMessage }}
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="card card-body blur py-4" style="height: 10vh">
+        <div class="card card-body blur py-4" style="height: 15vh">
             <form @submit.prevent="sendChat">
                 <div class="input-group ">
                     <textarea name="message" class="form-control form-control-lg rounded-pill" v-model="message"></textarea>
@@ -50,6 +50,7 @@ export default {
         chats: [],
         temporaryChatShow: false,
         temporaryMessage: '',
+        height: 0,
     }),
     methods: {
         sendChat() {
@@ -81,6 +82,7 @@ export default {
         }
     },
     mounted() {
+        this.height = window.innerHeight;
         document.getElementById("cover-spin").style.display = "block";
         this.axios.get('message/chat?clientId=' + window.localStorage.getItem('clientId')).then((response) => {
             document.getElementById("cover-spin").style.display = "none";
@@ -89,6 +91,7 @@ export default {
                 this.scrollChat();
             });
         });
+        this
     },
 };
 </script>
